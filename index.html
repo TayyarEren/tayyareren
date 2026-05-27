@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tayyar Eren — Fachinformatiker Systemintegration</title>
+<meta name="description" content="Portfolio von Tayyar Eren — Fachinformatiker Systemintegration mit Fokus auf Windows Server, Active Directory, PowerShell-Automation und SQL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d0e;
+  --bg-2: #131315;
+  --surface: #1a1a1c;
+  --surface-2: #222226;
+  --text: #ededeb;
+  --text-dim: #a3a3a0;
+  --text-mute: #6b6b68;
+  --accent: #ff6b35;
+  --accent-soft: rgba(255, 107, 53, 0.12);
+  --accent-glow: rgba(255, 107, 53, 0.25);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --teal: #5ee2c0;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Geist', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle noise texture overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: overlay;
+}
+
+/* Background ambient gradient */
+body::after {
+  content: '';
+  position: fixed;
+  top: -20%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, var(--accent-glow), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(13, 13, 14, 0.7);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.nav-logo span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  transition: color 0.25s ease;
+  position: relative;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+.lang-toggle {
+  display: flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.lang-toggle button {
+  background: transparent;
+  border: none;
+  color: var(--text-mute);
+  padding: 0.35rem 0.85rem;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: all 0.25s ease;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: 0.05em;
+}
+
+.lang-toggle button.active {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .nav-links a { display: none; }
+}
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 6rem;
+  padding-bottom: 4rem;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+.hero-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-mute);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-right: 0.5rem;
+  box-shadow: 0 0 12px var(--teal);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.2s forwards;
+}
+
+.hero-title .italic {
+  font-style: italic;
+  color: var(--accent);
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(20px); }
+}
+
+.hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--text-dim);
+  margin-bottom: 2.5rem;
+  max-width: 540px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.5s forwards;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.7s forwards;
+}
+
+.hero-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.45rem 0.95rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  color: var(--text-dim);
+  letter-spacing: 0.05em;
+  transition: all 0.25s ease;
+}
+
+.hero-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Photo placeholder */
+.hero-photo {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 4/5;
+  justify-self: end;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.4s forwards;
+}
+
+@media (max-width: 900px) {
+  .hero-photo { justify-self: start; max-width: 280px; }
+}
+
+.photo-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.photo-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 50%, rgba(94, 226, 192, 0.08) 100%);
+  z-index: 1;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  color: var(--text-mute);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 2;
+}
+
+.photo-placeholder svg {
+  width: 60px;
+  height: 60px;
+  opacity: 0.3;
+  margin-bottom: 1rem;
+}
+
+.photo-placeholder-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.photo-info {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 0;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+/* ─── SECTIONS ─── */
+section {
+  padding: 7rem 0;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+}
+
+.section-number {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.section-title .italic { font-style: italic; color: var(--text-dim); }
+
+/* ─── ABOUT ─── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 4rem;
+}
+
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+.about-text {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  max-width: 640px;
+}
+
+.about-text p { margin-bottom: 1.5rem; }
+
+.about-text strong { color: var(--text); font-weight: 500; }
+
+.about-meta {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.about-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.about-meta-label {
+  color: var(--text-mute);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-meta-value { color: var(--text); }
+
+/* ─── SKILLS ─── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 1.8rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, var(--accent-soft) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.skill-card:hover::before { opacity: 1; }
+
+.skill-card > * { position: relative; z-index: 1; }
+
+.skill-icon {
+  width: 36px;
+  height: 36px;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+
+.skill-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.skill-list {
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+.skill-list li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.skill-list li:last-child { border-bottom: none; }
+
+.skill-list li::before {
+  content: '→ ';
+  color: var(--accent);
+  opacity: 0.6;
+}
+
+/* ─── PROJECTS ─── */
+.projects-list { display: flex; flex-direction: column; gap: 2rem; }
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .project-card {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    padding: 1.8rem;
+  }
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+}
+
+.project-card:hover::before { transform: scaleY(1); }
+
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+  letter-spacing: 0.1em;
+  padding-top: 0.4rem;
+}
+
+.project-content { min-width: 0; }
+
+.project-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.project-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 4px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.project-desc {
+  color: var(--text-dim);
+  margin-bottom: 1.2rem;
+  max-width: 640px;
+  font-size: 0.98rem;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-pill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.3rem 0.7rem;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-dim);
+}
+
+.project-arrow {
+  width: 32px;
+  height: 32px;
+  color: var(--text-mute);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.project-card:hover .project-arrow {
+  color: var(--accent);
+  transform: translate(4px, -4px);
+}
+
+/* ─── LANGUAGES ─── */
+.languages-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.lang-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem;
+  position: relative;
+}
+
+.lang-flag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+.lang-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.lang-level {
+  color: var(--text-dim);
+  font-size: 0.88rem;
+  margin-bottom: 1rem;
+}
+
+.lang-bar {
+  height: 3px;
+  background: var(--bg-2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.lang-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--teal));
+  border-radius: 999px;
+  transition: width 1.5s ease;
+}
+
+/* ─── GOAL ─── */
+.goal-card {
+  background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  padding: 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.goal-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 60%;
+  height: 200%;
+  background: radial-gradient(circle, var(--accent-glow), transparent 60%);
+  filter: blur(60px);
+}
+
+.goal-card > * { position: relative; z-index: 1; }
+
+.goal-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.goal-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 1.5rem;
+  max-width: 800px;
+}
+
+.goal-title .italic { font-style: italic; color: var(--accent); }
+
+.goal-desc {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  max-width: 680px;
+  margin-bottom: 2rem;
+}
+
+.goal-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.goal-stack-item {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  backdrop-filter: blur(10px);
+}
+
+/* ─── CONTACT ─── */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.contact-title .italic { font-style: italic; color: var(--accent); }
+
+.contact-desc {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.contact-links { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+  transform: translateX(4px);
+}
+
+.contact-link-label {
+  color: var(--text-mute);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.contact-link-value { font-size: 0.95rem; color: var(--text); }
+
+.contact-arrow {
+  width: 20px;
+  height: 20px;
+  color: var(--text-mute);
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover .contact-arrow {
+  color: var(--accent);
+  transform: translate(3px, -3px);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-mute);
+}
+
+footer .accent { color: var(--accent); }
+
+/* ─── LANG VISIBILITY ─── */
+[data-lang] { display: none; }
+body[data-current-lang="de"] [data-lang="de"] { display: inline; }
+body[data-current-lang="en"] [data-lang="en"] { display: inline; }
+body[data-current-lang="de"] .block[data-lang="de"],
+body[data-current-lang="de"] p[data-lang="de"],
+body[data-current-lang="de"] div[data-lang="de"],
+body[data-current-lang="de"] li[data-lang="de"] { display: block; }
+body[data-current-lang="en"] .block[data-lang="en"],
+body[data-current-lang="en"] p[data-lang="en"],
+body[data-current-lang="en"] div[data-lang="en"],
+body[data-current-lang="en"] li[data-lang="en"] { display: block; }
+
+/* ─── SCROLL REVEAL ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── PRINT ─── */
+@media print {
+  body::before, body::after { display: none; }
+  nav { position: static; }
+}
+</style>
+</head>
+<body data-current-lang="de">
+
+<!-- ─── NAV ─── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">TAYYAR.EREN<span>_</span></div>
+    <div class="nav-links">
+      <a href="#about" data-lang="de">Über mich</a><a href="#about" data-lang="en">About</a>
+      <a href="#skills" data-lang="de">Skills</a><a href="#skills" data-lang="en">Skills</a>
+      <a href="#projects" data-lang="de">Projekte</a><a href="#projects" data-lang="en">Projects</a>
+      <a href="#contact" data-lang="de">Kontakt</a><a href="#contact" data-lang="en">Contact</a>
+      <div class="lang-toggle">
+        <button class="active" onclick="setLang('de')">DE</button>
+        <button onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-meta">
+      <span>◉ PORTFOLIO / 2026</span>
+      <span><span class="status-dot"></span><span data-lang="de">Verfügbar ab Sommer 2026</span><span data-lang="en">Available from Summer 2026</span></span>
+    </div>
+
+    <div class="hero-grid">
+      <div>
+        <h1 class="hero-title">
+          Tayyar<br>
+          <span class="italic">Eren.</span>
+        </h1>
+        <p class="hero-subtitle">
+          <span data-lang="de"><strong style="color:var(--text)">Fachinformatiker Systemintegration</strong> im 3. Lehrjahr bei Wikosoftware GmbH in Freiburg. Spezialisiert auf Windows-Infrastruktur, PowerShell-Automation und SQL — mit klarem Blick Richtung Data Science.</span>
+          <span data-lang="en"><strong style="color:var(--text)">IT Systems Integration Apprentice</strong> in my 3rd year at Wikosoftware GmbH in Freiburg, Germany. Specialized in Windows infrastructure, PowerShell automation and SQL — with a clear path toward Data Science.</span>
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Windows Server</span>
+          <span class="hero-tag">Active Directory</span>
+          <span class="hero-tag">PowerShell</span>
+          <span class="hero-tag">SQL Server</span>
+          <span class="hero-tag">IIS</span>
+          <span class="hero-tag">Python →</span>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <div class="photo-frame">
+          <!-- Profil-Foto: Ersetze diesen Block mit <img src="profile.jpg" alt="Tayyar Eren"> -->
+          <div class="photo-placeholder">
+            <div class="photo-placeholder-content">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>
+              <span data-lang="de">FOTO PLATZHALTER<br>profile.jpg</span>
+              <span data-lang="en">PHOTO PLACEHOLDER<br>profile.jpg</span>
+            </div>
+          </div>
+        </div>
+        <div class="photo-info">
+          <span>TAYYAR EREN</span>
+          <span>FREIBURG / DE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section id="about" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">01 — </span>
+      <h2 class="section-title"><span data-lang="de">Über <span class="italic">mich</span></span><span data-lang="en">About <span class="italic">me</span></span></h2>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p data-lang="de" class="block">
+          Geboren in der Türkei, gewachsen mit einer Liebe zu klassischer Sufi-Literatur — und gelandet zwischen Active-Directory-Konsolen und PowerShell-Skripten in Freiburg. Mein Weg in die IT war nicht der direkteste, aber genau deshalb betrachte ich Systeme anders: <strong>als Geschichten, die Struktur und Logik brauchen, um zu funktionieren.</strong>
+        </p>
+        <p data-lang="de" class="block">
+          Bei <strong>Wikosoftware GmbH</strong> arbeite ich täglich an Windows-Server-Umgebungen, automatisiere wiederkehrende Aufgaben mit PowerShell und löse Datenbank-Probleme in T-SQL. Mein <strong>AD-Audit Tool</strong> und das <strong>Wikoweb Automatic Installation</strong> Skript zeigen, was mich antreibt — saubere Automation statt manueller Klick-Marathons.
+        </p>
+        <p data-lang="de" class="block">
+          Das nächste Kapitel: <strong>Data Science.</strong> Die analytische Tiefe der Statistik, die Eleganz von Python, die Power von pandas und scikit-learn. Aus Infrastruktur wird Insight.
+        </p>
+
+        <p data-lang="en" class="block">
+          Born in Turkey, raised on a love for classical Sufi literature — and now landed between Active Directory consoles and PowerShell scripts in Freiburg, Germany. My path into IT wasn't the most direct, but that's exactly why I see systems differently: <strong>as stories that need structure and logic to function.</strong>
+        </p>
+        <p data-lang="en" class="block">
+          At <strong>Wikosoftware GmbH</strong>, I work daily on Windows Server environments, automate repetitive tasks with PowerShell, and debug database issues in T-SQL. My <strong>AD-Audit Tool</strong> and <strong>Wikoweb Automatic Installation</strong> script reflect what drives me — clean automation over click-marathons.
+        </p>
+        <p data-lang="en" class="block">
+          The next chapter: <strong>Data Science.</strong> The analytical depth of statistics, the elegance of Python, the power of pandas and scikit-learn. From infrastructure to insight.
+        </p>
+      </div>
+
+      <div class="about-meta">
+        <div class="about-meta-item">
+          <span class="about-meta-label" data-lang="de">Standort</span><span class="about-meta-label" data-lang="en">Location</span>
+          <span class="about-meta-value">Freiburg im Breisgau, DE</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label" data-lang="de">Status</span><span class="about-meta-label" data-lang="en">Status</span>
+          <span class="about-meta-value" data-lang="de">3. Lehrjahr · IHK AP2</span>
+          <span class="about-meta-value" data-lang="en">3rd year · IHK AP2</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label" data-lang="de">Unternehmen</span><span class="about-meta-label" data-lang="en">Company</span>
+          <span class="about-meta-value">Wikosoftware GmbH</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label" data-lang="de">Beruf</span><span class="about-meta-label" data-lang="en">Profession</span>
+          <span class="about-meta-value" data-lang="de">Fachinformatiker · Systemintegration</span>
+          <span class="about-meta-value" data-lang="en">IT Specialist · System Integration</span>
+        </div>
+        <div class="about-meta-item">
+          <span class="about-meta-label" data-lang="de">Verfügbar ab</span><span class="about-meta-label" data-lang="en">Available from</span>
+          <span class="about-meta-value">Sommer / Summer 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section id="skills" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">02 — </span>
+      <h2 class="section-title"><span data-lang="de">Technische <span class="italic">Skills</span></span><span data-lang="en">Technical <span class="italic">Stack</span></span></h2>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z"/>
+        </svg>
+        <h3 class="skill-title">Infrastructure</h3>
+        <ul class="skill-list">
+          <li>Windows Server 2022</li>
+          <li>Active Directory · GPO</li>
+          <li>IIS · Webserver-Konfig</li>
+          <li>Hyper-V · Ubuntu Server</li>
+          <li>VPN · RDP · FortiClient</li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"/>
+        </svg>
+        <h3 class="skill-title">Database</h3>
+        <ul class="skill-list">
+          <li>SQL Server · SSMS</li>
+          <li>T-SQL · DDL · DML</li>
+          <li>Backup & Recovery</li>
+          <li>Mixed Mode Auth</li>
+          <li>SQL Server Express</li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"/>
+        </svg>
+        <h3 class="skill-title">Scripting & Automation</h3>
+        <ul class="skill-list">
+          <li>PowerShell (Advanced)</li>
+          <li>Bash · Linux Shell</li>
+          <li>SSL · Certificate Mgmt</li>
+          <li>Netplan · Linux Config</li>
+          <li>HTML · CSS · JS</li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15a4.5 4.5 0 0 0 4.5 4.5H18a3.75 3.75 0 0 0 1.332-7.257 3 3 0 0 0-3.758-3.848 5.25 5.25 0 0 0-10.233 2.33A4.502 4.502 0 0 0 2.25 15Z"/>
+        </svg>
+        <h3 class="skill-title"><span data-lang="de">Cloud & Security</span><span data-lang="en">Cloud & Security</span></h3>
+        <ul class="skill-list">
+          <li>Azure AD · Entra ID</li>
+          <li>SAML · SSO</li>
+          <li>Cloudflare Pages</li>
+          <li>DSGVO Grundlagen</li>
+          <li>DMZ · CIA-Triade</li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5"/>
+        </svg>
+        <h3 class="skill-title"><span data-lang="de">Lernend</span><span data-lang="en">Learning</span></h3>
+        <ul class="skill-list">
+          <li>Python · pandas · NumPy</li>
+          <li>scikit-learn</li>
+          <li>Statistics</li>
+          <li>Data Visualization</li>
+          <li>SQL Analytics</li>
+        </ul>
+      </div>
+
+      <div class="skill-card">
+        <svg class="skill-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25m18 0A2.25 2.25 0 0 0 18.75 3H5.25A2.25 2.25 0 0 0 3 5.25m18 0V12a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 12V5.25"/>
+        </svg>
+        <h3 class="skill-title"><span data-lang="de">Werkzeuge</span><span data-lang="en">Tools</span></h3>
+        <ul class="skill-list">
+          <li>Git · GitHub</li>
+          <li>Jira · Confluence</li>
+          <li>VS Code · SSMS</li>
+          <li>Visio · Diagrammtools</li>
+          <li>Excel · Office 365</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">03 — </span>
+      <h2 class="section-title"><span data-lang="de">Ausgewählte <span class="italic">Projekte</span></span><span data-lang="en">Selected <span class="italic">Work</span></span></h2>
+    </div>
+
+    <div class="projects-list">
+      <div class="project-card">
+        <div class="project-number">001</div>
+        <div class="project-content">
+          <h3 class="project-title">
+            AD-Audit Tool
+            <span class="project-badge" data-lang="de">Abgeschlossen</span><span class="project-badge" data-lang="en">Completed</span>
+          </h3>
+          <p class="project-desc" data-lang="de">
+            PowerShell-basiertes Tool zur Sicherheitsprüfung einer Active-Directory-Umgebung. Generiert Reports über inaktive Konten, schwache Passwort-Richtlinien, GPO-Inkonsistenzen und Privileg-Eskalations-Risiken. Entwickelt im Rahmen der Wikosoftware-Infrastruktur.
+          </p>
+          <p class="project-desc" data-lang="en">
+            PowerShell-based tool for security auditing an Active Directory environment. Generates reports on inactive accounts, weak password policies, GPO inconsistencies, and privilege escalation risks. Developed within the Wikosoftware infrastructure.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">PowerShell</span>
+            <span class="tech-pill">Active Directory</span>
+            <span class="tech-pill">Security Audit</span>
+            <span class="tech-pill">Reporting</span>
+          </div>
+        </div>
+        <svg class="project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+        </svg>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">002</div>
+        <div class="project-content">
+          <h3 class="project-title">
+            Wikoweb Automatic Installation
+            <span class="project-badge" data-lang="de">Produktiv</span><span class="project-badge" data-lang="en">Production</span>
+          </h3>
+          <p class="project-desc" data-lang="de">
+            Vollautomatisches PowerShell-Installationsskript für Wikoweb auf Windows-Servern. Erkennt OS-Typen, prüft Voraussetzungen, konfiguriert IIS, installiert SSL-Zertifikate mit Trust-Flags und führt eine Post-Install-Validierung durch (<code>Test-Installation.ps1</code>).
+          </p>
+          <p class="project-desc" data-lang="en">
+            Fully automated PowerShell installation script for Wikoweb on Windows servers. Detects OS types, validates prerequisites, configures IIS, installs SSL certificates with trust flags, and runs a post-install validation (<code>Test-Installation.ps1</code>).
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">PowerShell</span>
+            <span class="tech-pill">IIS</span>
+            <span class="tech-pill">SSL/TLS</span>
+            <span class="tech-pill">Windows Server</span>
+            <span class="tech-pill">Automation</span>
+          </div>
+        </div>
+        <svg class="project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+        </svg>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">003</div>
+        <div class="project-content">
+          <h3 class="project-title">
+            IHK-AP2-Pro
+            <span class="project-badge">PWA · LIVE</span>
+          </h3>
+          <p class="project-desc" data-lang="de">
+            Progressive Web App mit 215 Prüfungsfragen aus 15 Kategorien zur Vorbereitung auf die IHK Abschlussprüfung Teil 2. Offline-fähig, deployed auf Cloudflare Pages. Single-File-Architektur für maximale Portabilität.
+          </p>
+          <p class="project-desc" data-lang="en">
+            Progressive Web App with 215 exam questions across 15 categories for IHK final exam preparation. Offline-capable, deployed on Cloudflare Pages. Single-file architecture for maximum portability.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">HTML · CSS · JS</span>
+            <span class="tech-pill">PWA</span>
+            <span class="tech-pill">Cloudflare Pages</span>
+            <span class="tech-pill">Service Worker</span>
+          </div>
+        </div>
+        <svg class="project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+        </svg>
+      </div>
+
+      <div class="project-card">
+        <div class="project-number">004</div>
+        <div class="project-content">
+          <h3 class="project-title">
+            Lernplan AP2 — Interactive Platform
+            <span class="project-badge" data-lang="de">Lernwerkzeug</span><span class="project-badge" data-lang="en">Study Tool</span>
+          </h3>
+          <p class="project-desc" data-lang="de">
+            Vereinheitlichte HTML-Plattform mit Pareto-Tracker, Wochenplan, Quiz, Subnetting-Trainer, RAID-Storage-Rechner und UML/ER-Diagramm-Spielen — alles in einer Datei. 53-Karten-Flashcard-System mit IHK-Style-Antworten.
+          </p>
+          <p class="project-desc" data-lang="en">
+            Unified HTML platform with Pareto tracker, weekly study plan, quiz, subnetting trainer, RAID storage calculator, and UML/ER diagram games — all in one file. 53-card flashcard system with IHK-style answers.
+          </p>
+          <div class="project-tech">
+            <span class="tech-pill">HTML · CSS · JS</span>
+            <span class="tech-pill">Single-File</span>
+            <span class="tech-pill">Interactive UI</span>
+            <span class="tech-pill">Education</span>
+          </div>
+        </div>
+        <svg class="project-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LANGUAGES ─── -->
+<section id="languages" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">04 — </span>
+      <h2 class="section-title"><span data-lang="de">Sprachen</span><span data-lang="en">Languages</span></h2>
+    </div>
+
+    <div class="languages-grid">
+      <div class="lang-card">
+        <div class="lang-flag">TR / TÜRKÇE</div>
+        <div class="lang-name">Türkçe</div>
+        <div class="lang-level" data-lang="de">Muttersprache</div>
+        <div class="lang-level" data-lang="en">Native</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">DE / DEUTSCH</div>
+        <div class="lang-name">Deutsch</div>
+        <div class="lang-level" data-lang="de">Fließend · C1</div>
+        <div class="lang-level" data-lang="en">Fluent · C1</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:92%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">EN / ENGLISH</div>
+        <div class="lang-name">English</div>
+        <div class="lang-level" data-lang="de">Gut · B2</div>
+        <div class="lang-level" data-lang="en">Good · B2</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:75%"></div></div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flag">IT / ITALIANO</div>
+        <div class="lang-name">Italiano</div>
+        <div class="lang-level" data-lang="de">Grundkenntnisse · A2</div>
+        <div class="lang-level" data-lang="en">Basic · A2</div>
+        <div class="lang-bar"><div class="lang-bar-fill" style="width:35%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GOAL ─── -->
+<section id="goal" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">05 — </span>
+      <h2 class="section-title"><span data-lang="de">Karriere<span class="italic">ziel</span></span><span data-lang="en">Career <span class="italic">Goal</span></span></h2>
+    </div>
+
+    <div class="goal-card">
+      <div class="goal-label" data-lang="de">▸ Nächstes Kapitel</div>
+      <div class="goal-label" data-lang="en">▸ Next Chapter</div>
+      <h3 class="goal-title">
+        <span data-lang="de">Von der <span class="italic">Infrastruktur</span> zur <span class="italic">Information.</span></span>
+        <span data-lang="en">From <span class="italic">Infrastructure</span> to <span class="italic">Insight.</span></span>
+      </h3>
+      <p class="goal-desc" data-lang="de">
+        Nach der Ausbildung möchte ich in den Bereich <strong style="color:var(--text)">Data Science</strong> einsteigen. Meine bestehende Stärke in SQL, PowerShell und Systemdenken bildet eine solide Basis — die nächste Etappe ist Python, Statistik und Machine Learning. Aus Daten Geschichten machen, aus Mustern Entscheidungen.
+      </p>
+      <p class="goal-desc" data-lang="en">
+        After my apprenticeship, I aim to transition into <strong style="color:var(--text)">Data Science</strong>. My existing strengths in SQL, PowerShell, and systems thinking form a solid foundation — the next stretch is Python, statistics, and machine learning. Turn data into stories, patterns into decisions.
+      </p>
+      <div class="goal-stack">
+        <span class="goal-stack-item">Python</span>
+        <span class="goal-stack-item">pandas</span>
+        <span class="goal-stack-item">NumPy</span>
+        <span class="goal-stack-item">scikit-learn</span>
+        <span class="goal-stack-item">matplotlib</span>
+        <span class="goal-stack-item">Jupyter</span>
+        <span class="goal-stack-item">SQL Analytics</span>
+        <span class="goal-stack-item">Statistics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact" class="reveal">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-number">06 — </span>
+      <h2 class="section-title"><span data-lang="de">Kontakt</span><span data-lang="en">Contact</span></h2>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <h3 class="contact-title">
+          <span data-lang="de">Lass uns <span class="italic">reden.</span></span>
+          <span data-lang="en">Let's <span class="italic">talk.</span></span>
+        </h3>
+        <p class="contact-desc" data-lang="de">
+          Offen für Gespräche über IT-Infrastruktur, Automation, Data Science oder einfach ein gutes Kaffee in Freiburg.
+        </p>
+        <p class="contact-desc" data-lang="en">
+          Open to conversations about IT infrastructure, automation, data science — or just a good coffee in Freiburg.
+        </p>
+      </div>
+
+      <div class="contact-links">
+        <a href="mailto:DEINE-EMAIL@example.com" class="contact-link">
+          <div>
+            <span class="contact-link-label">Email</span>
+            <span class="contact-link-value">deine-email@example.com</span>
+          </div>
+          <svg class="contact-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+        <a href="https://github.com/DEIN-USERNAME" class="contact-link" target="_blank" rel="noopener">
+          <div>
+            <span class="contact-link-label">GitHub</span>
+            <span class="contact-link-value">github.com/dein-username</span>
+          </div>
+          <svg class="contact-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/DEIN-PROFIL" class="contact-link" target="_blank" rel="noopener">
+          <div>
+            <span class="contact-link-label">LinkedIn</span>
+            <span class="contact-link-value">linkedin.com/in/dein-profil</span>
+          </div>
+          <svg class="contact-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="container">
+    <span data-lang="de">Gebaut mit <span class="accent">♥</span> in Freiburg · © 2026 Tayyar Eren</span>
+    <span data-lang="en">Built with <span class="accent">♥</span> in Freiburg · © 2026 Tayyar Eren</span>
+  </div>
+</footer>
+
+<script>
+// Language Toggle
+function setLang(lang) {
+  document.body.setAttribute('data-current-lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('.lang-toggle button').forEach(b => b.classList.remove('active'));
+  event && event.target && event.target.classList.add('active');
+  // Re-activate on direct call without event
+  document.querySelectorAll('.lang-toggle button').forEach(b => {
+    if (b.textContent.trim().toLowerCase() === lang) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+  localStorage.setItem('preferred-lang', lang);
+}
+
+// Initialize language from localStorage or browser
+(function() {
+  const saved = localStorage.getItem('preferred-lang');
+  const browserLang = navigator.language.startsWith('de') ? 'de' : 'en';
+  const initial = saved || browserLang;
+  document.body.setAttribute('data-current-lang', initial);
+  document.documentElement.setAttribute('lang', initial);
+  document.querySelectorAll('.lang-toggle button').forEach(b => {
+    if (b.textContent.trim().toLowerCase() === initial) b.classList.add('active');
+    else b.classList.remove('active');
+  });
+})();
+
+// Scroll Reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth scroll for nav links
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
