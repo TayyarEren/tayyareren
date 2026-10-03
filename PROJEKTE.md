@@ -2,6 +2,8 @@
 
 Bestandsaufnahme und Orientierung · 03.10.2026
 
+**Aktualisierung:** Profil und die HTML-Seiten in `portfolio` und `tayyareren` stellen Tayyar Eren als Fachinformatiker für Systemintegration im IT-Support bei wiko vor.
+
 ## Öffentliche Repositories
 
 | Repository | Einordnung | Inhalt |
@@ -14,8 +16,8 @@ Bestandsaufnahme und Orientierung · 03.10.2026
 | [erentayyar](https://github.com/TayyarEren/erentayyar) | Portfolio-Variante | HTML identisch mit `websitetayyar`, `Lebenslauf-Eren` und `poertci/index.html`. |
 | [websitetayyar](https://github.com/TayyarEren/websitetayyar) | Gleicher HTML-Stand | Siehe `erentayyar`. |
 | [Lebenslauf-Eren](https://github.com/TayyarEren/Lebenslauf-Eren) | Gleicher HTML-Stand | Siehe `erentayyar`. |
-| [Portfolio-Eren](https://github.com/TayyarEren/Portfolio-Eren) | Gleicher HTML-Stand | `index.html` identisch mit `portfolio/index.html`. |
-| [tayyar-CV_1](https://github.com/TayyarEren/tayyar-CV_1) | Gleicher HTML-Stand | `index.html` identisch mit `portfolio/index.html`. |
+| [Portfolio-Eren](https://github.com/TayyarEren/Portfolio-Eren) | Gleicher HTML-Stand | Frühere Kopie von `portfolio/index.html`; Berufsprofil dort inzwischen aktualisiert. |
+| [tayyar-CV_1](https://github.com/TayyarEren/tayyar-CV_1) | Gleicher HTML-Stand | Frühere Kopie von `portfolio/index.html`; Berufsprofil dort inzwischen aktualisiert. |
 | [poertci](https://github.com/TayyarEren/poertci) | Zwei HTML-Varianten | `index.html` und `index..html` enthalten unterschiedliche Fassungen. |
 | [index.html](https://github.com/TayyarEren/index.html) | Weitere HTML-Variante | `index..html` identisch mit `poertci/index..html`. |
 | [Test-Freiburg](https://github.com/TayyarEren/Test-Freiburg) | Testrepository | README; keine Anwendung. |
@@ -35,7 +37,7 @@ Die genannten HTML-Dateien hatten zum Zeitpunkt der Bestandsaufnahme dieselbe Gi
 ## Noch zu bearbeiten
 
 - Fehlende Bilddateien: `portfolio`, `Portfolio-Eren` und `tayyar-CV_1` referenzieren `Bilder/tayyarerenPortfolio.png`; `tayyar-CV` referenziert `profile.jpg`.
-- Berufliche Statusangaben in den Website-Fassungen enthalten noch frühere Umschulungs-/Praktikumsangaben.
+- Die weiteren Website-Varianten enthalten teilweise noch frühere Umschulungs-/Praktikumsangaben; `portfolio` und `tayyareren` sind aktualisiert.
 - Vor einer späteren Zusammenführung sollte geprüft werden, welche Variante als Website verwendet wird und welche externen Links darauf zeigen.
 
 Die Repository-Namen und die vorhandenen HTML-Dateipfade wurden bei der Dokumentationsordnung beibehalten.
