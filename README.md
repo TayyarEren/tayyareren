@@ -1,7 +1,9 @@
 # Hallo, ich bin Tayyar Eren
 
-**IT-Support · Windows Server · SQL Server · PowerShell**  
+**Fachinformatiker für Systemintegration · IT-Support bei wiko**  
 Freiburg im Breisgau, Deutschland
+
+Ich bin Fachinformatiker für Systemintegration und arbeite im IT-Support bei wiko in Freiburg. Meine Schwerpunkte sind Windows Server, Microsoft SQL Server, IIS und PowerShell sowie die strukturierte Analyse von Anwendungs- und Verbindungsproblemen.
 
 Ich verbinde praktische IT-Arbeit mit einem betriebswirtschaftlichen Hintergrund und Erfahrung in Kundenservice und Unternehmensführung. Mich interessiert, wie Systeme zusammenarbeiten – und wie sich Fehler systematisch eingrenzen und verständlich erklären lassen.
 
@@ -34,4 +36,4 @@ Fehler verstehen, bevor ich Änderungen vornehme. Schritte nachvollziehbar dokum
 
 ---
 
-*IT support and infrastructure enthusiast based in Freiburg, Germany, with a background in business administration. My focus is Windows Server, SQL Server, PowerShell and practical troubleshooting.*
+*I am an IT specialist in systems integration and work in IT support at wiko in Freiburg, Germany. My focus is Windows Server, Microsoft SQL Server, IIS and PowerShell, alongside systematic troubleshooting of application and connectivity issues.*
