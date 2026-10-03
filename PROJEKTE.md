@@ -2,7 +2,7 @@
 
 Bestandsaufnahme und Orientierung · 03.10.2026
 
-**Aktualisierung:** Profil und die HTML-Seiten in `portfolio` und `tayyareren` stellen Tayyar Eren als Fachinformatiker für Systemintegration im IT-Support bei wiko vor.
+**Aktualisierung:** Die Profil-README und die HTML-Seite in `portfolio` stellen Tayyar Eren als Fachinformatiker für Systemintegration im IT-Support bei wiko vor.
 
 ## Öffentliche Repositories
 
@@ -37,7 +37,7 @@ Die genannten HTML-Dateien hatten zum Zeitpunkt der Bestandsaufnahme dieselbe Gi
 ## Noch zu bearbeiten
 
 - Fehlende Bilddateien: `portfolio`, `Portfolio-Eren` und `tayyar-CV_1` referenzieren `Bilder/tayyarerenPortfolio.png`; `tayyar-CV` referenziert `profile.jpg`.
-- Die weiteren Website-Varianten enthalten teilweise noch frühere Umschulungs-/Praktikumsangaben; `portfolio` und `tayyareren` sind aktualisiert.
+- Die weiteren Website-Varianten enthalten teilweise noch frühere Umschulungs-/Praktikumsangaben; Die Hauptseite in `portfolio` ist aktualisiert; die separate HTML-Seite in `tayyareren` ist noch nicht angepasst.
 - Vor einer späteren Zusammenführung sollte geprüft werden, welche Variante als Website verwendet wird und welche externen Links darauf zeigen.
 
 Die Repository-Namen und die vorhandenen HTML-Dateipfade wurden bei der Dokumentationsordnung beibehalten.
